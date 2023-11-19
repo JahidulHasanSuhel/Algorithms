@@ -1,0 +1,76 @@
+//This code is written by suhel.
+
+#include <bits/stdc++.h>
+using namespace std;
+class Graph {
+    int V;
+    vector<list<int> > adj;
+ 
+    public:
+    Graph(int V);
+
+    void addEdge(int u, int v);
+ 
+    // Prints BFS traversal from a given source s
+    void BFS(int src);
+};
+ 
+Graph::Graph(int V)
+{
+    this->V = V;
+    adj.resize(V);
+}
+ 
+void Graph::addEdge(int u, int v)
+{
+    adj[u].push_back(v);
+}
+ 
+void Graph::BFS(int src)
+{
+    queue <int> q;
+
+    vector<bool> vis;
+    vis.resize(V, false);
+ 
+
+    vis[src] = true;
+
+    q.push(src);
+
+    while (!q.empty()) {
+        src = q.front();
+        cout << src << " ";
+        q.pop();
+        
+
+        for (auto it : adj[src]) {
+            if (!vis[it]) {
+                vis[it] = true;
+                 q.push(it);
+            }
+        }
+    }
+}
+ int main()
+{
+
+    Graph g(4);
+    
+    g.addEdge(0, 1);
+    g.addEdge(0, 2);
+    g.addEdge(1, 2);
+    g.addEdge(2, 0);
+    g.addEdge(2, 3);
+    g.addEdge(3, 3);
+
+
+
+
+    cout << "starting from vertex 2"<<endl;
+        
+
+    g.BFS(2);
+ 
+    return 0;
+}
